@@ -12,9 +12,16 @@ let candidateAnswer = "";
 
 
 //TODO: Variables for Part 2
-let questions;
-let correctAnswers;
-let candidateAnswers;
+// Created an array of questions given in tabular form in assignment question
+let questions =["Who was the first American woman in space? ", 
+              "True or false: 5 kilometer == 5000 meters? ",
+              "(5 + 3)/2 * 10 = ? ",
+              "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ",
+              "What is the minimum crew size for the ISS? "];
+// Created an array of correct answers given in tabular form in assignment question
+let correctAnswers =["Sally Ride" ,"true","40","Trajectory","3"];
+// Define the empty array for storing candidate answers
+let candidateAnswers =[];
 
 
 function askForName() {
@@ -24,20 +31,40 @@ function askForName() {
 
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-   //console.log(question);
+   /*console.log(question);
    let candidateAnswer = prompt(question);
+   */
+  for(let i=0; i<questions.length ; i++) {
+    // console.log(questions[i]);
+  candidateAnswers[i] = input.question(questions[i]);
+  }
 }
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 
-
+  for(let j=0; j<questions.length; j++) {  
+    if(candidateAnswers[j].toLowerCase()===correctAnswers[j].toLowerCase()){
+      totalCorrect++;
+      // calling the custom function by passing the index
+      candidateResponseValidation(j);
+    } else {
+      candidateResponseValidation(j);    
+    }
+  }
+  console.log("Number of correct answers :  " + totalCorrect);
 
   let grade;  //TODO 3.2 use this variable to calculate the candidates score.
 
 
   return grade;
+}
+// Created a new function for candidate response validation and print log in console
+function candidateResponseValidation (index){
+      console.log([index+1] +") " +questions[index]);
+      console.log("Your Answer : "+candidateAnswers[index]);
+      console.log("Correct Answer: "+correctAnswers[index]);
 }
 
 function runProgram() {
