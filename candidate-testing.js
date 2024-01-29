@@ -43,23 +43,30 @@ function askQuestion() {
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
+  let correctAnswerCount = 0;
 
   for(let j=0; j<questions.length; j++) {  
     if(candidateAnswers[j].toLowerCase()===correctAnswers[j].toLowerCase()){
-      totalCorrect++;
+      correctAnswerCount++;
       // calling the custom function by passing the index
       candidateResponseValidation(j);
     } else {
       candidateResponseValidation(j);    
     }
   }
-  console.log("Number of correct answers :  " + totalCorrect);
+  console.log("Number of correct answers :  " + correctAnswerCount);
 
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
-
-
+  let grade = (correctAnswerCount)/(questions.length)*100;
+  //TODO 3.2 use this variable to calculate the candidates score.
+  console.log(">>> Overall Grade:" + grade + "% (" + correctAnswerCount + " of " + questions.length + " responses correct) <<<");
+  if(grade>=80) {
+      console.log(">>> Status: PASSED <<<");
+    } else {
+      console.log(">>> Status: FAILED <<<");
+    }
   return grade;
 }
+
 // Created a new function for candidate response validation and print log in console
 function candidateResponseValidation (index){
       console.log([index+1] +") " +questions[index]);
